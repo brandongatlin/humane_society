@@ -33,4 +33,4 @@ class Animal(models.Model):
 
 class LostPet(Animal):
     date_lost = models.DateTimeField()
-    date_found = models.DateTimeField()
+    date_found = models.DateTimeField(default=None, blank=True, null=True)
