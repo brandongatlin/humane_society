@@ -15,9 +15,11 @@ class BreedAdmin(admin.ModelAdmin):
 @admin.register(Animal)
 class PetAdmin(admin.ModelAdmin):
     list_display = ['id', 'description', 'breed']
+    list_filter = ['breed']
 
 
 @admin.register(LostPet)
 class LostPetAdmin(admin.ModelAdmin):
     list_display = ['id', 'animal_name', 'image', 'description', 'breed']
     list_display_links = ['animal_name']
+    list_filter = ['date_lost']
