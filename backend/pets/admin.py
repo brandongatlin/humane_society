@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.admin import AdminSite
-from .models import Animal, Breed, LostPet
+from .models import Animal, Breed, LostPet, Human
 
 
 admin.site.site_header = 'Baytown Humane Society Admin Page'
@@ -14,7 +14,8 @@ class BreedAdmin(admin.ModelAdmin):
 
 @admin.register(Animal)
 class PetAdmin(admin.ModelAdmin):
-    list_display = ['id', 'description', 'breed']
+    list_display = ['id', 'animal_name', 'image', 'description', 'owner', 'breed', 'age']
+    list_display_links = ['animal_name']
     list_filter = ['breed']
 
 
@@ -23,3 +24,9 @@ class LostPetAdmin(admin.ModelAdmin):
     list_display = ['id', 'animal_name', 'image', 'description', 'breed']
     list_display_links = ['animal_name']
     list_filter = ['date_lost']
+
+@admin.register(Human)
+class HumanAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name']
+    list_display_links = ['name']
+    list_filter = ['first_name', 'last_name']
