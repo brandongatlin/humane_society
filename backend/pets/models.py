@@ -24,12 +24,12 @@ class Animal(models.Model):
     created_at = models.DateTimeField(auto_now=True)
     animal_name = models.CharField(max_length=40)
     owner = models.ForeignKey(Human, on_delete=models.CASCADE, default=None, blank=True, null=True)
-    image = models.ImageField(upload_to='images/', default='default.png' )
+    image = models.ImageField(upload_to='images/', default='images/default.png' )
     primary_color = ColorField(default='#FF0000')
     secondary_color = ColorField(default='#FF0000')
     gender = models.CharField(choices=[('M', 'Male'), ('F', 'Female')], max_length=6)
     species = models.CharField(max_length=40)
-    breed = models.ForeignKey(Breed, on_delete=models.CASCADE)
+    breed = models.ForeignKey(Breed, on_delete=models.CASCADE, default=None, blank=True, null=True)
     birth_date = models.DateTimeField(default=None, blank=True, null=True)
     weight = models.IntegerField() #lbs
     height = models.IntegerField() #inches
