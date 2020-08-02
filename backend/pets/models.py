@@ -15,9 +15,9 @@ class Human(models.Model):
 
 
 class Breed(models.Model):
-    breed = models.CharField(max_length=40)
+    breed_or_coat = models.CharField(max_length=40)
     def __str__(self):
-        return self.breed
+        return self.breed_or_coat
 
 
 class Animal(models.Model):
@@ -29,7 +29,7 @@ class Animal(models.Model):
     secondary_color = ColorField(default='#FF0000')
     gender = models.CharField(choices=[('M', 'Male'), ('F', 'Female')], max_length=6)
     species = models.CharField(max_length=40)
-    breed = models.ForeignKey(Breed, on_delete=models.CASCADE, default=None, blank=True, null=True)
+    breed_or_coat = models.ForeignKey(Breed, on_delete=models.CASCADE, default=None, blank=True, null=True)
     birth_date = models.DateTimeField(default=None, blank=True, null=True)
     weight = models.IntegerField() #lbs
     height = models.IntegerField() #inches
@@ -38,8 +38,12 @@ class Animal(models.Model):
     adopted = models.DateTimeField(default=None, blank=True, null=True)
     house_trained = models.BooleanField()
     micro_chipped = models.BooleanField(default=False)
-    euthanized = models.DateTimeField(default=None, blank=True, null=True)
-    reason_euthanized = models.TextField(default=None, blank=True, null=True)
+    currently_lost = models.BooleanField(default=False)
+    date_lost = models.DateTimeField(default=None, blank=True, null=True)
+    date_found = models.DateTimeField(default=None, blank=True, null=True)
+    was_euthanized = models.BooleanField(default=False)
+    date_euthanized = models.DateTimeField(default=None, blank=True, null=True)
+    reasons_euthanized = models.TextField(default=None, blank=True, null=True)
  
     def __str__(self):
         return self.animal_name
@@ -51,10 +55,4 @@ class Animal(models.Model):
         dif =  dt.now(tz=pytz.utc) - self.birth_date
         years = dif.days // 365
         months = (dif.days % 365) // 30
-        return f'{years} years and {months} months'
-
-
-
-class LostPet(Animal):
-    date_lost = models.DateTimeField()
-    date_found = models.DateTimeField(default=None, blank=True, null=True)
+        return f'{years} years and {months} months'    
