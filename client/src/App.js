@@ -1,49 +1,36 @@
 import React from 'react';
+import {ReactQueryDevtools} from 'react-query-devtools';
 
 import {
   BrowserRouter as Router,
-  Switch,
   Route,
-  Link
+  Switch
 } from "react-router-dom";
-import { Button } from 'reactstrap';
+
+import Navigation from './components/Navigation';
+import NoMatch from './components/NoMatch';
 
 import Home from './components/Home';
+import Pets from './components/Pets';
+import Lost from './components/Lost';
 
 
 function App() {
   return (
+    <>
     <Router>
       <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/pets">Pets</Link>
-            </li>
-            <li>
-              <Link to="/lost">Lost Pets</Link>
-            </li>
-          </ul>
-        </nav>
-
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
+        <Navigation />
         <Switch>
-          <Route path="/pets">
-            <h1>PETS</h1>
-          </Route>
-          <Route path="/lost">
-            <Button color="danger">LOST</Button>
-          </Route>
-          <Route path="*">
-            <Home />
-          </Route>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/pets" component={Pets} />
+          <Route exact path="/lost" component={Lost} />
+          <Route component={NoMatch} />          
         </Switch>
       </div>
     </Router>
+    {process.env.NODE_ENV !== 'production' ? <ReactQueryDevtools /> : null}
+    </>
   );
 }
 
