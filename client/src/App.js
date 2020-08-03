@@ -29,7 +29,7 @@ function App() {
         </Switch>
       </div>
     </Router>
-    {process.env.NODE_ENV !== 'production' ? <ReactQueryDevtools /> : null}
+    {process.env.NODE_ENV !== 'production' ? <ReactQueryDevtools initialIsOpen={false}/> : null}
     </>
   );
 }
