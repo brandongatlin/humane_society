@@ -13,20 +13,16 @@ const formatBirthday = (date) => {
     const months = Math.floor((days) % 365 / 30);
     const weeks = Math.floor(days / 7);
 
-    const hasAnS = (num) => {
+    const shouldHaveS = (num) => {
         if (num < 2) {
             return false;
         }
         return true;
     }
 
-    const addS = (str) => {
-        return str += 's';
-    }
-
     let formattedTime = '';
     if (years > 0) {
-        formattedTime += `${years} ${hasAnS(years) ? addS('Year') : 'Year'}`;
+        formattedTime += `${years} ${shouldHaveS(years) ? 'Years' : 'Year'}`;
     }
 
     if (years > 0 && months > 0) {
@@ -34,13 +30,13 @@ const formatBirthday = (date) => {
     }
 
     if (months > 0 && months < 12) {
-        formattedTime += `${months} ${hasAnS(months) ? addS('Month') : 'Month'}`;
+        formattedTime += `${months} ${shouldHaveS(months) ? 'Months' : 'Month'}`;
     }
 
     if (years === 0 && months === 0 && weeks === 0) {
-        formattedTime += `${days} ${hasAnS(days) ? addS('Day') : 'Day'}`;
+        formattedTime += `${days} ${shouldHaveS(days) ? 'Days' : 'Day'}`;
     } else if (years === 0 && months === 0) {
-        formattedTime += `${weeks} ${hasAnS(weeks) ? addS('Week') : 'Week'}`;
+        formattedTime += `${weeks} ${shouldHaveS(weeks) ? 'Weeks' : 'Week'}`;
     }
 
     return formattedTime + ' Old';
