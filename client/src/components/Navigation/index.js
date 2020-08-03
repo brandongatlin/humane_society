@@ -1,62 +1,50 @@
-import React, {useState} from 'react';
+import React, {useState} from "react";
+import { NavLink } from "react-router-dom";
+import { Nav, NavItem } from 'reactstrap';
 
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarText
-} from 'reactstrap';
-
-
+// Depending on the current path, this component sets the "active" class on the appropriate navigation link item
 const Navigation = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const toggle = () => setIsOpen(!isOpen);
+  const [active, setActive] = useState('/');
 
-    return(
-
-        <div>
-      <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">BHS</NavbarBrand>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
-            <NavItem>
-              <NavLink href="/pets">Pets</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/lost">Lost</NavLink>
-            </NavItem>
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                Options
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>
-                  Option 1
-                </DropdownItem>
-                <DropdownItem>
-                  Option 2
-                </DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>
-                  Reset
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
-          </Nav>
-          <NavbarText>Simple Text</NavbarText>
-        </Collapse>
-      </Navbar>
-    </div>
-    )
+  return (
+    <Nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <NavLink className="navbar-brand" to="/">
+        BHS
+      </NavLink>
+      <div>
+        <ul className="navbar-nav">
+          <NavItem>
+            <NavLink
+              to="/pets"
+              className={
+                window.location.pathname === "/pets"
+                  ? "nav-link active"
+                  : "nav-link"
+              }
+            >
+              Our Pets
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              to="/lost"
+              className={window.location.pathname === "/lost" ? "nav-link active" : "nav-link"}
+            >
+              Lost Pets
+            </NavLink>
+          </NavItem>
+          {/* <li className="nav-item">
+            <Link
+              to="/search"
+              className={window.location.pathname === "/search" ? "nav-link active" : "nav-link"}
+            >
+              Search
+            </Link>
+          </li> */}
+        </ul>
+      </div>
+    </Nav>
+  );
 }
 
 export default Navigation;
