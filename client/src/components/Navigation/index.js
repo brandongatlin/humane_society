@@ -1,10 +1,9 @@
-import React, {useState} from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import { Nav, NavItem } from 'reactstrap';
 
 // Depending on the current path, this component sets the "active" class on the appropriate navigation link item
 const Navigation = () => {
-  const [active, setActive] = useState('/');
 
   return (
     <Nav className="navbar navbar-expand-lg navbar-light bg-light">

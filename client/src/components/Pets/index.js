@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import axios from 'axios';
+import PetCard from '../PetCard';
 
 import { BASE_URL, MEDIA_URL } from '../../utils';
 
@@ -18,12 +19,13 @@ return(
     <p>{status !== 'success' ? status : null}</p>
         {
             status === 'success' && (
-                data.map((pet) => {
+                <div className='pet-grid'>
+                {data.map((pet) => {
                     return (
-                    <p>{pet.animal_name}</p>
-                        // <img alt={`${pet.animal_name} ${pet.description}`} src={`${MEDIA_URL}/${pet.image}`}/>
+                      <PetCard animalName={pet.animal_name} src={`${MEDIA_URL}/${pet.image}`} description={pet.description} birth={pet.birth_date}/>
                     )
-                })
+                })}
+                </div>
             )
         }
     </>

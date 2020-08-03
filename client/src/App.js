@@ -19,7 +19,7 @@ function App() {
   return (
     <>
     <Router>
-      <div>
+      <div className='container'>
         <Navigation />
         <Switch>
           <Route exact path="/" component={Home} />
