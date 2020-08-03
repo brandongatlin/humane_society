@@ -17,17 +17,17 @@ const { data, status } = useQuery('petsQuery', fetchPets);
 return(
     <>
     <p>{status !== 'success' ? status : null}</p>
-        {
-            status === 'success' && (
-                <div className='pet-grid'>
-                {data.map((pet) => {
-                    return (
-                      <PetCard animalName={pet.animal_name} src={`${MEDIA_URL}/${pet.image}`} description={pet.description} birth={pet.birth_date}/>
-                    )
-                })}
-                </div>
-            )
-        }
+    {
+        status === 'success' && (
+            <div className='pet-grid'>
+            {data.map((pet) => {
+                return (
+                    <PetCard key={pet.id} animalName={pet.animal_name} src={`${MEDIA_URL}/${pet.image}`} description={pet.description} birth={pet.birth_date}/>
+                )
+            })}
+            </div>
+        )
+    }
     </>
     )
 }

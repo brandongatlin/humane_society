@@ -4,12 +4,15 @@ import {
   CardTitle, CardSubtitle
 } from 'reactstrap';
 
+import { formatBirthday } from '../../utils';
+
 const PetCard = ({animalName, src, description, birth}) => {
+
   return (
       <Card>
         <CardBody>
           <CardTitle>{animalName}</CardTitle>
-          <CardSubtitle>{birth}</CardSubtitle>
+          <CardSubtitle>{formatBirthday(birth)}</CardSubtitle>
         </CardBody>
         <img className="petImg" src={src} alt="Card image cap" />
         <CardBody>
