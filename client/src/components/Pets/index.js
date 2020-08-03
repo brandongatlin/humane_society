@@ -2,15 +2,7 @@ import React from 'react';
 import {useQuery} from 'react-query';
 import axios from 'axios';
 
-const BASE_URL = 
-    process.env.NODE_ENV !== 'production' ? 
-    'http://localhost:8000' : 
-    'http://www.baytownhumanesociety.org/';
-
-const MEDIA_URL = 
-    process.env.NODE_ENV !== 'production' ? 
-    'http://localhost:8000/media' : 
-    'http://www.baytownhumanesociety.org/media';
+import {BASE_URL, MEDIA_URL} from '../../utils';
 
 const fetchPets = async () => {
     const {data} = await axios.get(new URL(`${BASE_URL}/pets`));
@@ -19,15 +11,15 @@ const fetchPets = async () => {
 }
 
 const Pets = () => {
-const { data, status } = useQuery('petsQ', fetchPets);
+const { data, status } = useQuery('petsQuery', fetchPets);
 return(
     <>
-    <p>PETS {status !== 'success' ? status : null}</p>
+    <p>{status !== 'success' ? status : null}</p>
         {
             status === 'success' && (
                 data.map((pet) => {
                     return (
-                        <img alt={`Image of ${pet.animal_name}`} src={`${MEDIA_URL}/${pet.image}`}/>
+                        <img alt={`${pet.animal_name} ${pet.description}`} src={`${MEDIA_URL}/${pet.image}`}/>
                     )
                 })
             )
